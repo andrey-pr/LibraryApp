@@ -1,8 +1,5 @@
-package view;
+package trash;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import trash.DBManager;
 
 public class MyContentPane extends JScrollPane
 {

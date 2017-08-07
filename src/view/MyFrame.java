@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import trash.DBManager;
-
 public class MyFrame extends JFrame
 {
 	private MyMenuBar _menuBar;
@@ -31,6 +29,7 @@ public class MyFrame extends JFrame
 		_toolBar._issuedbookread.addActionListener(_manager);
 		_toolBar._rootcontrol.addActionListener(_manager);
 		_toolBar._beercount.addActionListener(_manager);
+		_toolBar._adduser.addActionListener(_manager);
 		getContentPane().add(_toolBar, BorderLayout.NORTH);
 		getContentPane().add(_contentPane, BorderLayout.CENTER);
 		setVisible(true);

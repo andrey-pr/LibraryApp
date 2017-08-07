@@ -12,13 +12,13 @@ public class BookProvider
 {
 	public ArrayList<Book> getBooks()
 	{
-		return convertToBook(getData(Commands.getBooks));
+		return convertToBooks(getData(Commands.getBooks));
 	}
 	public ResultSet getBooksRS()
 	{
 		return getData(Commands.getBooks);
 	}
-	private ArrayList<Book> convertToBook(ResultSet rs)
+	private ArrayList<Book> convertToBooks(ResultSet rs)
 	{
 		ArrayList<Book> al = new ArrayList<Book>();
 		try

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -29,6 +30,7 @@ public class ToolButtonListener implements ActionListener
 //		case "IBR": mountTable(_cartridge.issuedBookRead()); break;
 //		case "RC": mountTable(_cartridge.rootControl(JOptionPane.showInputDialog("Введите команду"))); break;
 		case "BC": mountText("Вам должны " + new BookProvider().countBeer()  + " бокалов пива"); break;
+		case "AU": mountPanel(new AddUserForm()); break;
 		}
 		_mp.repaint();
 		_mp.revalidate();
@@ -42,6 +44,11 @@ public class ToolButtonListener implements ActionListener
 	private void mountText(String str)
 	{
 		_mp.setViewportView(new JLabel(str));
+
+	}
+	private void mountPanel(JPanel panel)
+	{
+		_mp.setViewportView(panel);
 
 	}
 }

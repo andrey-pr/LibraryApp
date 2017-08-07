@@ -1,6 +1,7 @@
 package providers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import main.Commands;
@@ -11,23 +12,18 @@ public class StudentProvider
 {
 	public ArrayList<Student> getStudents()
 	{
-		return getData(Commands.getStudents);
+		return convertToStudents(getData(Commands.getStudents));
 	}
 	public ArrayList<Student> getStudentsByGroup(String groupName)
 	{
-		ArrayList<Student> al = new ArrayList<Student>();
-		//TODO: Must be released before
-		return al;
+		return convertToStudents(getData(Commands.getStudentsByGroupFirstPart + groupName + Commands.getStudentsByGroupLastPart));
 	}
 	public ArrayList<Student> getStudentsByFaculty(String facultyName)
 	{
-		ArrayList<Student> al = new ArrayList<Student>();
-		//TODO: Must be released before
-		return al;
+		return convertToStudents(getData(Commands.getStudentsByFacultityFirstPart + facultyName + Commands.getStudentsByFacultityLastPart));
 	}
-	private ArrayList<Student> getData(String script)
+	private ArrayList<Student> convertToStudents(ResultSet rs)
 	{
-		ResultSet rs = new DataProvider(ConnectionHolder.getInstance().con, script).getData();
 		ArrayList<Student> al = new ArrayList<Student>();
 		try
 		{
@@ -42,5 +38,27 @@ public class StudentProvider
 		}
 		return al;
 
+	}
+	private ResultSet getData(String script)
+	{
+		return new DataProvider(ConnectionHolder.getInstance().con, script).getData();
+		
+
+	}
+	public void saveStudent(Student student, String phone)
+	{
+		try
+		{
+			Statement st = ConnectionHolder.getInstance().con.createStatement();
+			st.execute(Commands.saveStudentFirstPart);
+			st.execute(Commands.saveStudent2Part + student.getName() + Commands.saveStudent3Part + student.getLname() + Commands.saveStudent4Part + student.getMname() + Commands.saveStudent5Part + student.getLogbook() + Commands.saveStudent6Part + student.getGroup() + Commands.saveStudent7Part);
+			st.execute(Commands.saveStudent8Part + phone + Commands.saveStudent9Part);
+			st.execute(Commands.saveStudentLastPart);
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
